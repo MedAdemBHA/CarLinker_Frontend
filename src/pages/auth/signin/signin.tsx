@@ -1,14 +1,16 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useMutation } from '@tanstack/react-query';
 
 import { loginUser } from '@/api/services/authServices';
 import carFormImg from '@/assets/carForm.avif';
+import log from '@/assets/Login.png';
 import { Input } from '@/components/commons/input/input';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import toast, { Toaster } from 'react-hot-toast';
 import { z } from 'zod';
 
 interface SignInState {
@@ -25,8 +27,11 @@ const SignUpSchema = z.object({
 });
 
 const Signin = () => {
-    const mutation = useMutation(loginUser);
+    const location: any = useLocation();
 
+    const from = location.state?.from?.pathname || '/';
+    const mutation = useMutation(loginUser);
+    const navigate = useNavigate();
     const methods = useForm<SignInState>({
         mode: 'onChange',
         resolver: zodResolver(SignUpSchema),
@@ -42,9 +47,32 @@ const Signin = () => {
             mutation.mutate(data, {
                 onSuccess: (data) => {
                     console.log('Login successful:', data.jwt);
+                    toast.success('Login successful!', {
+                        style: {
+                            border: '1px solid #008000', // Green border
+                            padding: '16px',
+                            color: '#008000', // Green text color
+                        },
+                        iconTheme: {
+                            primary: '#008000', // Green icon color
+                            secondary: '#FFFFFF', // White background for the icon
+                        },
+                    });
+                    navigate(from, { replace: true });
                 },
                 onError: (error) => {
                     console.error('Login error:', error);
+                    toast.error('Login failed.', {
+                        style: {
+                            border: '1px solid #FF0000', // Red border
+                            padding: '16px',
+                            color: '#FF0000', // Red text color
+                        },
+                        iconTheme: {
+                            primary: '#FF0000', // Red icon color
+                            secondary: '#FFFFFF', // White background for the icon
+                        },
+                    });
                 },
             });
         } catch {}
@@ -57,7 +85,11 @@ const Signin = () => {
 
             {/* right side login form */}
             <div className="shadow-xl p-10 flex items-center justify-center flex-col w-full">
-                <h2 className="pt-4 text-2xl text-center">Login</h2>
+                <img
+                    src={log}
+                    className="h-[100px] max-sm:h-[34px] md-lg:h-[40px]"
+                    alt=""
+                />
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                         <div className="mb-4">
@@ -94,12 +126,13 @@ const Signin = () => {
                     Don't have an account yet?{' '}
                     <Link
                         className=" text-blue-500 align-baseline hover:text-blue-800"
-                        to="/signup"
+                        to="/auth/signup"
                     >
-                        Signup
+                        Signin
                     </Link>
                 </p>
             </div>
+            <Toaster position="bottom-center" />
         </div>
     );
 };

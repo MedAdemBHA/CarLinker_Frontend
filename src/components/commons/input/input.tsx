@@ -18,6 +18,7 @@ type InputProps<
     type?: React.HTMLInputTypeAttribute;
     icon?: React.ReactNode;
     helperText?: string | null;
+    className?: string; // Add className prop
 };
 
 const Input: React.FC<InputProps> = ({
@@ -26,6 +27,7 @@ const Input: React.FC<InputProps> = ({
     label,
     disableError,
     placeholder,
+    className, // Destructure className prop
 }) => {
     const {
         control,
@@ -38,6 +40,8 @@ const Input: React.FC<InputProps> = ({
     });
     return (
         <div className="mb-4">
+            {' '}
+            {/* Apply className here */}
             <label className="block mb-2 text-sm font-bold text-gray-700">
                 {label}
             </label>
@@ -47,7 +51,9 @@ const Input: React.FC<InputProps> = ({
                     {...field}
                     type={type}
                     placeholder={placeholder}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darke"
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-grey-darke ${
+                        className || ''
+                    }`}
                 />
                 <div className="text-sm italic text-red-500">
                     {!disableError && fieldState.error?.message}

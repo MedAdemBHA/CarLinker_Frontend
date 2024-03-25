@@ -2,14 +2,18 @@ import { Link } from 'react-router-dom';
 
 // Make sure to import Link from react-router-dom if you're using it for routing
 
-const NotFoundPage = () => {
+const NotAccess = () => {
     return (
         <main className=" w-full   flex flex-col justify-center items-center">
-            <h1 className="text-9xl font-extrabold  tracking-widest mt-[200px]">
-                404
+            <h1 className="text-6xl font-extrabold  tracking-widest mt-[200px]">
+                Access to this
             </h1>
-            <div className="bg-[#004AAD] text-slate-200 px-2 text-sm rounded rotate-12 absolute">
-                Page Not Found
+            <h1 className="text-6xl font-extrabold  tracking-widest ">
+                page is restricted
+            </h1>
+            <div className="bg-[#004AAD] text-slate-200 px-2 text-sm rounded rotate-5 absolute">
+                Please check with the site admin if you believe this is a
+                mistake.
             </div>
             <button className="mt-5">
                 <Link
@@ -27,4 +31,4 @@ const NotFoundPage = () => {
     );
 };
 
-export default NotFoundPage;
+export default NotAccess;

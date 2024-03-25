@@ -8,6 +8,7 @@ import { loginUser } from '@/api/services/authServices';
 import carFormImg from '@/assets/carForm.avif';
 import log from '@/assets/Login.png';
 import { Input } from '@/components/commons/input/input';
+import { useAuth } from '@/context/authContext/authContext';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import toast, { Toaster } from 'react-hot-toast';
@@ -27,9 +28,8 @@ const SignUpSchema = z.object({
 });
 
 const Signin = () => {
-    const location: any = useLocation();
-
-    const from = location.state?.from?.pathname || '/';
+    const auth = useAuth();
+    const from = '/';
     const mutation = useMutation(loginUser);
     const navigate = useNavigate();
     const methods = useForm<SignInState>({
@@ -41,12 +41,10 @@ const Signin = () => {
         },
     });
     const { handleSubmit } = methods;
-
     const onSubmit = (data: SignInState) => {
         try {
             mutation.mutate(data, {
                 onSuccess: (data) => {
-                    console.log('Login successful:', data.jwt);
                     toast.success('Login successful!', {
                         style: {
                             border: '1px solid #008000', // Green border
@@ -57,6 +55,9 @@ const Signin = () => {
                             primary: '#008000', // Green icon color
                             secondary: '#FFFFFF', // White background for the icon
                         },
+                    });
+                    auth.signIn({
+                        token: data.jwt,
                     });
                     navigate(from, { replace: true });
                 },

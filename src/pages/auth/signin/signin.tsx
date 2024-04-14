@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { loginUser } from '@/api/services/authServices';
+import carFormImg from '@/assets/HeroImages/Carform.png';
 import log from '@/assets/Login.png';
 import { Input } from '@/components/commons/input/input';
 import { useAuth } from '@/context/authContext/authContext';

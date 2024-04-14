@@ -18,7 +18,8 @@ type InputProps<
     type?: React.HTMLInputTypeAttribute;
     icon?: React.ReactNode;
     helperText?: string | null;
-    className?: string; // Add className prop
+    classNameIN?: string;
+    classNameLA?: string; // Add className prop
 };
 
 const Input: React.FC<InputProps> = ({
@@ -27,7 +28,8 @@ const Input: React.FC<InputProps> = ({
     label,
     disableError,
     placeholder,
-    className, // Destructure className prop
+    classNameIN,
+    classNameLA, // Destructure className prop
 }) => {
     const {
         control,
@@ -42,7 +44,11 @@ const Input: React.FC<InputProps> = ({
         <div className="mb-4">
             {' '}
             {/* Apply className here */}
-            <label className="block mb-2 text-sm font-bold text-gray-700">
+            <label
+                className={`block mb-2 text-sm font-bold text-gray-700 ${
+                    classNameLA || ''
+                }`}
+            >
                 {label}
             </label>
             <div className="input-group">
@@ -52,7 +58,7 @@ const Input: React.FC<InputProps> = ({
                     type={type}
                     placeholder={placeholder}
                     className={`shadow appearance-none border rounded w-full py-2 px-3 text-grey-darke ${
-                        className || ''
+                        classNameIN || ''
                     }`}
                 />
                 <div className="text-sm italic text-red-500">

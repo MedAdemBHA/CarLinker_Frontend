@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const formatDateString = (timestamp: string): string => {
 
     return dateObject.toISOString().split('T')[0];
 };
-const TableRow: React.FC<TableRowProps> = ({ user, onDelete }) => {
+const TableRowUser: React.FC<TableRowProps> = ({ user, onDelete }) => {
     return (
         <>
             <tr>
@@ -67,4 +67,4 @@ const TableRow: React.FC<TableRowProps> = ({ user, onDelete }) => {
     );
 };
 
-export default TableRow;
+export default TableRowUser;

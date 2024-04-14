@@ -87,7 +87,7 @@ export default function EditUser() {
                                             type="name"
                                             icon="fa-solid fa-key"
                                             placeholder="Name"
-                                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                            classNameIN="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                         />
                                     </div>
                                     <div className="mb-4">
@@ -97,7 +97,7 @@ export default function EditUser() {
                                             type="email"
                                             icon="fa-solid fa-envelope"
                                             placeholder="Email"
-                                            className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                            classNameIN="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                         />
                                     </div>
 

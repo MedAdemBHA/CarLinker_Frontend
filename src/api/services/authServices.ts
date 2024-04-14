@@ -1,4 +1,5 @@
 // services.ts
+import { baseUrl } from '@/apiConfig';
 
 interface SignInState {
     // Define the structure of your SignInState
@@ -17,7 +18,7 @@ interface SignUpState {
 
 export const loginUser = async (data: SignInState): Promise<any> => {
     try {
-        const response = await fetch('http://localhost:8083/api/auth/login', {
+        const response = await fetch(`${baseUrl}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ export const loginUser = async (data: SignInState): Promise<any> => {
 };
 export const registerUser = async (data: SignUpState): Promise<string> => {
     try {
-        const response = await fetch('http://localhost:8083/api/auth/signup', {
+        const response = await fetch(`${baseUrl}/api/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

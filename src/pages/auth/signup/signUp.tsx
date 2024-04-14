@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
 import { registerUser } from '@/api/services/authServices';
-import carFormImg from '@/assets/carForm.avif';
+import carFormImg from '@/assets/HeroImages/Carform.png';
 import reg from '@/assets/Registre.png';
 import { Input } from '@/components/commons/input/input';
 
@@ -63,9 +63,8 @@ const Signup = () => {
 
     const onSubmit = (data: SignInState) => {
         mutation.mutate(data, {
-            onSuccess: (responseData) => {
-                console.log('Login successful:', responseData);
-                toast.success('Login successful!', {
+            onSuccess: () => {
+                toast.success('Sign up successful!', {
                     style: {
                         border: '1px solid #008000',
                         padding: '16px',
@@ -80,7 +79,7 @@ const Signup = () => {
             },
             onError: (error: any) => {
                 console.error('Login error:', error);
-                toast.error('Email is already in use.', {
+                toast.error('Oops! Something went wrong. ', {
                     style: {
                         border: '1px solid #FF0000',
                         padding: '16px',
@@ -97,9 +96,12 @@ const Signup = () => {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 w-[90%] md:w-[50%] lg:w-[90%] justify-center mt-5 mx-auto h-[95%]">
-            <div className="hidden lg:flex flex-col justify-center items-center">
+            <Link
+                to="/"
+                className="hidden lg:flex flex-col justify-center items-center"
+            >
                 <img src={carFormImg} alt="" />
-            </div>
+            </Link>
 
             {/* right side login form */}
             <div className="shadow-xl p-10 flex items-center  flex-col w-full">
@@ -151,7 +153,7 @@ const Signup = () => {
                         </div>
 
                         <button
-                            className="w-full px-4 py-2 font-bold text-white bg-[#004AAD] rounded-full hover:bg-[#004AAD] focus:outline-none focus:shadow-outline"
+                            className="w-full px-4 py-2 font-bold text-white bg-[#004AAD] rounded-md hover:bg-[#004AAD] focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             {mutation.isLoading ? 'Registre ...' : 'Registre'}

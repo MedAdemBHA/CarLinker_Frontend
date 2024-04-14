@@ -1,11 +1,10 @@
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { loginUser } from '@/api/services/authServices';
-import carFormImg from '@/assets/carForm.avif';
 import log from '@/assets/Login.png';
 import { Input } from '@/components/commons/input/input';
 import { useAuth } from '@/context/authContext/authContext';
@@ -80,9 +79,12 @@ const Signin = () => {
     };
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 w-[90%] md:w-[50%] lg:w-[90%] mx-auto min-h-screen">
-            <div className="hidden lg:flex flex-col justify-center items-center">
+            <Link
+                to="/"
+                className="hidden lg:flex flex-col justify-center items-center"
+            >
                 <img src={carFormImg} alt="" />
-            </div>
+            </Link>
 
             {/* right side login form */}
             <div className="shadow-xl p-10 flex items-center justify-center flex-col w-full">
@@ -114,7 +116,7 @@ const Signin = () => {
                         </div>
 
                         <button
-                            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                            className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
                             {mutation.isLoading ? 'Logging in...' : 'Login'}

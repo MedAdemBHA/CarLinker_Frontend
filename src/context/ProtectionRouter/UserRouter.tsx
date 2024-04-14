@@ -14,8 +14,8 @@ interface UserRouterProps {
 
 const UserRouter: React.FC<UserRouterProps> = ({ user, children }) => {
     console.log(user.userRole);
-    if (!user.isConnected && user.userRole !== 'USER') {
-        return <Navigate to="/noaccess" replace />;
+    if (!user.isConnected || user.userRole !== 'USER') {
+        return <Navigate to="/auth/signin" replace />;
     }
 
     return <>{children}</>;
